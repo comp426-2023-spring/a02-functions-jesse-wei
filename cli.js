@@ -6,7 +6,6 @@ import fetch from "node-fetch";
 
 var argv = (minimist)(process.argv.slice(2));
 
-
 // Help message
 if ('h' in argv) {
     console.log("Usage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE");
@@ -30,9 +29,6 @@ if (latitude == undefined) {
     console.log('Latitude must be in range');
 }
 
-if (Number.isInteger(latitude))
-    latitude = latitude.toFixed(1);
-
 var longitude;
 if ('e' in argv)
     longitude = Math.round(argv.e * 100) / 100;
@@ -43,21 +39,12 @@ if (longitude == undefined) {
     console.log('Longitude must be in range');
 }
 
-if (Number.isInteger(longitude))
-    longitude = longitude.toFixed(1);
-
 const timezone = 'z' in argv ? argv.z : moment.tz.guess();
 
-// Api stuff
+// API stuff
 const url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&daily=precipitation_hours&current_weather=true&timezone=" + timezone;
 const response = await fetch(url);
 const data = await response.json();
-// if ('error' in data) {
-//     console.log(`argv.n: ${argv.n}`);
-//     console.log(`argv.s: ${argv.s}`);
-//     console.log(`argv.w: ${argv.w}`);
-//     console.log(`argv.e: ${argv.e}`);
-// }
 
 // j flag
 if ('j' in argv) {
