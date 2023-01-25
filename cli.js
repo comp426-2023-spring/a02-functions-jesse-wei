@@ -45,8 +45,9 @@ const url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&lo
 const response = await fetch(url);
 const data = await response.json();
 if ('error' in data) {
-    console.log(`latitude: ${latitude}`);
-    console.log(`longitude: ${longitude}`);
+    // console.log(`latitude: ${latitude}`);
+    // console.log(`longitude: ${longitude}`);
+    console.log(`argv: ${argv}`);
 }
 
 // j flag
