@@ -2,6 +2,7 @@
 
 import minimist from 'minimist';
 import moment from 'moment-timezone';
+import fetch from "node-fetch";
 
 var argv = (minimist)(process.argv.slice(2));
 
@@ -51,12 +52,10 @@ if (days == 0)
     day_phrase = "today.";
 else if (days > 1)
     day_phrase = "in " + days + " days.";
-else {
+else
     day_phrase = "tomorrow.";
-}
 
-if (data.daily.precipitation_hours[days] > 0) {
+if (data.daily.precipitation_hours[days] > 0)
     console.log(`You might need your galoshes ${day_phrase}`);
-} else {
+else
     console.log(`You probably won't need your galoshes ${day_phrase}`);
-}
