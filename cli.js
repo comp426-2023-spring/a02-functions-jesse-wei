@@ -44,6 +44,10 @@ const timezone = 'z' in argv ? argv.z : moment.tz.guess();
 const url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&daily=precipitation_hours&current_weather=true&timezone=" + timezone;
 const response = await fetch(url);
 const data = await response.json();
+if ('error' in data) {
+    console.log(`latitude: ${latitude}`);
+    console.log(`longitude: ${longitude}`);
+}
 
 // j flag
 if ('j' in argv) {
