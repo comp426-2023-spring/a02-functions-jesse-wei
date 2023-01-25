@@ -26,6 +26,11 @@ if ('n' in argv)
 else if ('s' in argv)
     latitude = -Math.round(argv.s * 100) / 100;
 
+if (latitude == undefined) {
+    console.log('Latitude must be in range');
+    process.exit(1);
+}
+
 if (Number.isInteger(latitude))
     latitude = latitude.toFixed(1);
 
@@ -34,6 +39,11 @@ if ('e' in argv)
     longitude = Math.round(argv.e * 100) / 100;
 else if ('w' in argv)
     longitude = -Math.round(argv.w * 100) / 100;
+
+if (longitude == undefined) {
+    console.log('Longitude must be in range');
+    process.exit(1);
+}
 
 if (Number.isInteger(longitude))
     longitude = longitude.toFixed(1);
@@ -44,12 +54,12 @@ const timezone = 'z' in argv ? argv.z : moment.tz.guess();
 const url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&daily=precipitation_hours&current_weather=true&timezone=" + timezone;
 const response = await fetch(url);
 const data = await response.json();
-if ('error' in data) {
-    console.log(`argv.n: ${argv.n}`);
-    console.log(`argv.s: ${argv.s}`);
-    console.log(`argv.w: ${argv.w}`);
-    console.log(`argv.e: ${argv.e}`);
-}
+// if ('error' in data) {
+//     console.log(`argv.n: ${argv.n}`);
+//     console.log(`argv.s: ${argv.s}`);
+//     console.log(`argv.w: ${argv.w}`);
+//     console.log(`argv.e: ${argv.e}`);
+// }
 
 // j flag
 if ('j' in argv) {
