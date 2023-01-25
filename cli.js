@@ -19,21 +19,11 @@ if ('h' in argv) {
 }
 
 // Get CLI arguments
-var latitude;
-if ('n' in argv)
-    latitude = Math.round(argv.n * 100) / 100;
-else if ('s' in argv)
-    latitude = -Math.round(argv.s * 100) / 100;
-
+const latitude = 'n' in argv ? Math.round(argv.n * 100) / 100 : 's' in argv ? -Math.round(argv.s * 100) / 100 : undefined;
 if (latitude == undefined)
     console.log('Latitude must be in range');
 
-var longitude;
-if ('e' in argv)
-    longitude = Math.round(argv.e * 100) / 100;
-else if ('w' in argv)
-    longitude = -Math.round(argv.w * 100) / 100;
-
+const longitude = 'e' in argv ? Math.round(argv.e * 100) / 100 : 'w' in argv ? -Math.round(argv.w * 100) / 100 : undefined;
 if (longitude == undefined)
     console.log('Longitude must be in range');
 
@@ -51,14 +41,8 @@ if ('j' in argv) {
 }
 
 // Create response message
-var day_phrase;
 const days = 'd' in argv ? argv.d : 1;
-if (days == 0)
-    day_phrase = "today.";
-else if (days > 1)
-    day_phrase = "in " + days + " days.";
-else
-    day_phrase = "tomorrow.";
+const day_phrase = days == 0 ? "today." : days > 1 ? "in " + days + " days." : "tomorrow.";
 
 if (data.daily.precipitation_hours[days] > 0)
     console.log(`You might need your galoshes ${day_phrase}`);
