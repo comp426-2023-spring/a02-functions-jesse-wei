@@ -25,9 +25,8 @@ if ('n' in argv)
 else if ('s' in argv)
     latitude = -Math.round(argv.s * 100) / 100;
 
-if (latitude == undefined) {
+if (latitude == undefined)
     console.log('Latitude must be in range');
-}
 
 var longitude;
 if ('e' in argv)
@@ -35,9 +34,8 @@ if ('e' in argv)
 else if ('w' in argv)
     longitude = -Math.round(argv.w * 100) / 100;
 
-if (longitude == undefined) {
+if (longitude == undefined)
     console.log('Longitude must be in range');
-}
 
 const timezone = 'z' in argv ? argv.z : moment.tz.guess();
 
@@ -46,7 +44,7 @@ const url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&lo
 const response = await fetch(url);
 const data = await response.json();
 
-// j flag
+// if j flag exists, pretty print JSON and exit
 if ('j' in argv) {
     console.log(JSON.stringify(data, null, 2));
     process.exit(0);
