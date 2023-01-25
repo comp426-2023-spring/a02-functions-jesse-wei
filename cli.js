@@ -26,11 +26,17 @@ if ('n' in argv)
 else if ('s' in argv)
     latitude = -Math.round(argv.s * 100) / 100;
 
+if (Number.isInteger(latitude))
+    latitude = latitude.toFixed(1);
+
 var longitude;
 if ('e' in argv)
     longitude = Math.round(argv.e * 100) / 100;
 else if ('w' in argv)
     longitude = -Math.round(argv.w * 100) / 100;
+
+if (Number.isInteger(longitude))
+    longitude = longitude.toFixed(1);
 
 const timezone = 'z' in argv ? argv.z : moment.tz.guess();
 
