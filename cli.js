@@ -28,7 +28,6 @@ else if ('s' in argv)
 
 if (latitude == undefined) {
     console.log('Latitude must be in range');
-    process.exit(1);
 }
 
 if (Number.isInteger(latitude))
@@ -42,7 +41,6 @@ else if ('w' in argv)
 
 if (longitude == undefined) {
     console.log('Longitude must be in range');
-    process.exit(1);
 }
 
 if (Number.isInteger(longitude))
